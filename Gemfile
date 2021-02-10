@@ -32,6 +32,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
   # https://github.com/thoughtbot/factory_bot_rails
   gem 'factory_bot_rails', '~> 6.1'
+  # https://github.com/DatabaseCleaner/database_cleaner
+  gem 'database_cleaner-active_record'
 end
 
 group :development do
