@@ -3,15 +3,33 @@
 require 'rails_helper'
 
 describe 'Books API', type: :request do
+  let(:first_author) { FactoryBot.create(:author, name: 'First Author') }
+  let(:second_author) { FactoryBot.create(:author, name: 'Second Author') }
+
   describe 'GET /books' do
     it 'returns all books' do
-      author = FactoryBot.create(:author, name: 'Test Author')
-      FactoryBot.create(:book, title: 'Test Title 1', description: 'Test Description 1', author_id: author.id)
-      FactoryBot.create(:book, title: 'Test Title 2', description: 'Test Description 2', author_id: author.id)
+      FactoryBot.create(:book, title: 'Test Title 1', description: 'Test Description 1', author: first_author)
+      FactoryBot.create(:book, title: 'Test Title 2', description: 'Test Description 2', author: second_author)
 
       get '/api/v1/books'
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).size).to eq(2)
+      expect(response_body.size).to eq(2)
+      expect(response_body).to eql(
+        [
+          {
+            'id' => 1,
+            'title' => 'Test Title 1',
+            'description' => 'Test Description 1',
+            'author' => 'First Author'
+          },
+          {
+            'id' => 2,
+            'title' => 'Test Title 2',
+            'description' => 'Test Description 2',
+            'author' => 'Second Author'
+          }
+        ]
+      )
     end
   end
 
@@ -24,25 +42,25 @@ describe 'Books API', type: :request do
 
       expect(response).to have_http_status(:created)
       expect(Author.count).to eql(1)
-      expect(JSON.parse(response.body)).to eql(
-                                             {
-                                               'id' => 1,
-                                               'title' => 'Test Title',
-                                               'description' => 'Test Description',
-                                               'author' => 'Test Author'
-                                             }
-                                           )
+      expect(response_body).to eql(
+        {
+          'id' => 1,
+          'title' => 'Test Title',
+          'description' => 'Test Description',
+          'author' => 'Test Author'
+        }
+      )
     end
   end
 
   describe 'DELETE /books/:id' do
     # book = FactoryBot.create(:book, title: 'Test Title', description: 'Test Description')
-    let!(:book) { FactoryBot.create(:book, title: 'Test Title', description: 'Test Description') }
+    let!(:book) { FactoryBot.create(:book, title: 'Test Title', description: 'Test Description', author: first_author) }
     it 'deletes a book' do
       expect do
         delete "/api/v1/books/#{book.id}"
       end.to change { Book.count }.from(1).to(0)
-      expect(response).to have_http_status
+      expect(response).to have_http_status(:no_content)
     end
   end
 end
