@@ -13,8 +13,20 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    book = find_book
+    book.destroy!
+
+    head :no_content
+  end
+
   private
+
   def book_params
     params.require(:book).permit(:title, :description)
+  end
+
+  def find_book
+    Book.find(params.require(:id))
   end
 end
