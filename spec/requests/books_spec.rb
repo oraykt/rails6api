@@ -24,6 +24,14 @@ describe 'Books API', type: :request do
 
       expect(response).to have_http_status(:created)
       expect(Author.count).to eql(1)
+      expect(JSON.parse(response.body)).to eql(
+                                             {
+                                               'id' => 1,
+                                               'title' => 'Test Title',
+                                               'description' => 'Test Description',
+                                               'author' => 'Test Author'
+                                             }
+                                           )
     end
   end
 

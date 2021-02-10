@@ -9,9 +9,7 @@ class BooksRepresenter
         id: book.id,
         title: book.title,
         description: book.description,
-        author: {
-          name: book.author.name
-        }
+        author: book.author.name
       }
     end
   end
