@@ -5,13 +5,13 @@ require 'rails_helper'
 describe 'Authentication', type: :request do
   describe 'POST /authenticate' do
     let(:user) { FactoryBot.create(:user, username: 'test_user') }
-
+    let(:token) {AuthenticationTokenService.call(1)}
     it 'authenticates the client' do
       post '/api/v1/authenticate', params: { username: user.username, password: 'test_passw0rd.' }
 
       expect(response).to have_http_status(:created)
       expect(response_body).to eql({
-                                     'token' => '123'
+                                     'token' => token
                                    })
     end
     it 'returns error when username is missing' do
