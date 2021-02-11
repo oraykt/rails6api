@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,22 +12,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_141244) do
-
-  create_table "authors", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema.define(version: 20_210_210_141_244) do
+  create_table 'authors', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.integer "author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_books_on_author_id"
+  create_table 'books', force: :cascade do |t|
+    t.string 'title'
+    t.text 'description'
+    t.integer 'author_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['author_id'], name: 'index_books_on_author_id'
   end
 
-  add_foreign_key "books", "authors"
+  add_foreign_key 'books', 'authors'
 end

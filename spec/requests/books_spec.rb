@@ -64,7 +64,6 @@ describe 'Books API', type: :request do
         ]
       )
     end
-
   end
 
   describe 'POST /books' do

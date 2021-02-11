@@ -12,13 +12,11 @@ module Api
         render json: { token: '123' }, status: :created
       end
 
-
       private
 
       def parameter_missing(error)
         render json: { error: error.message }, status: :unprocessable_entity
       end
-
     end
   end
 end
