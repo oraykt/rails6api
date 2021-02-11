@@ -36,7 +36,6 @@ describe 'Authentication', type: :request do
       post '/api/v1/authenticate', params: { username: user.username, password: 'incorrect_password' }
 
       expect(response).to have_http_status(:unauthorized)
-
     end
   end
 end
