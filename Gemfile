@@ -47,3 +47,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # https://github.com/rubocop-hq/rubocop
 gem 'rubocop', '~> 1.9', '>= 1.9.1'
+# https://github.com/jwt/ruby-jwt
+gem 'jwt', '~> 2.2', '>= 2.2.2'
