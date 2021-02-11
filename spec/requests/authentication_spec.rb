@@ -16,12 +16,18 @@ describe 'Authentication', type: :request do
       post '/api/v1/authenticate', params: { password: 'test_passw0rd.' }
 
       expect(response).to have_http_status(:unprocessable_entity)
+      # expect(response_body).to eql({
+      #                                'error' => 'param is missing or the value is empty: password'
+      #                              })
     end
 
     it 'returns error when password is missing' do
       post '/api/v1/authenticate', params: { username: 'test_user' }
 
       expect(response).to have_http_status(:unprocessable_entity)
+      # expect(response_body).to eql({
+      #                                'error' => 'param is missing or the value is empty: username'
+      #                              })
     end
   end
 end
